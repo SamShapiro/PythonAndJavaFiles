@@ -1,0 +1,9 @@
+import re
+
+s = "GATATATGCATATACTT"
+s1 = "ATAT"
+f = []
+for i in re.findall(s1, s):
+    f.append(str(i.start()+1))
+
+print " ".join(f)
