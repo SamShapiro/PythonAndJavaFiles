@@ -1,0 +1,24 @@
+from twilio.rest import TwilioRest Client
+import re
+
+sid = "AC844c5b4933ec6aacbe690d11d843269a"
+auth = "7ba335367bc1bf4bb35cd32be1fb8c67"
+
+client = TwilioRestClient(sid, auth)
+
+
+toNumber = input('Please enter a valid 10-digit US phone number to which to send a text: ')
+formattedNum = re.sub("\D", "", toNumber)
+while len(formattedNum) != 10:
+    toNumber = input('I\'m sorry, the number you entered does not appear to be of the correct length. Remember that we can only send texts to valid US numbers for the time being. Please do not include a "+1" at the beginning of the number. Please try again: ')
+    formattedNum = re.sub("\D", "", toNumber)
+
+textBody = input("Please ented the text you would like to send: ")
+
+message = client.messages.create(
+    to = formattedNum,
+    from_ = "[Twilio Number]",
+    body = textBody,
+)
+
+print(message.sid)
